@@ -1,48 +1,60 @@
-const CHOICE_ARR = ['rock', 'paper', 'scissors'];
+const MOVES = ['rock', 'paper', 'scissors'];
 
+// // random move generator
 const getComputerChoice = () => {
-    let randomIndex = Math.floor(Math.random() * CHOICE_ARR.length);
-    return CHOICE_ARR[randomIndex];
+    let randomMove = MOVES[Math.floor(Math.random() * MOVES.length)];
+    return randomMove;
 }
 
+// // one round of game
 const playRound = (playerSelection, computerSelection) => {
-    let casedPlayerSelection = playerSelection.toLowerCase();
     let winner;
     if (playerSelection === computerSelection) {
-        console.log("This round is a draw")
-    } else if ((casedPlayerSelection === 'rock' && computerSelection === 'paper') || (casedPlayerSelection === 'paper' && computerSelection === 'scissors') || (casedPlayerSelection === 'scissors' && computerSelection==='rock')) {
+        $('.round-result').text(`This round is a tie. Both players picked ${computerSelection}`)
+    } else if ((playerSelection === 'rock' && computerSelection === 'paper') || (playerSelection === 'paper' && computerSelection === 'scissors') || (playerSelection === 'scissors' && computerSelection==='rock')) {
         winner = 'computer';
-        console.log(`You lose this round! ${computerSelection} beats ${playerSelection}`);
+        $('.round-result').text(`You lose this round! ${computerSelection} beats ${playerSelection}`);
     } else {
         winner = 'player';
-        console.log(`You win this round! ${playerSelection} beats ${computerSelection}`);
+        $('.round-result').text(`You win this round! ${playerSelection} beats ${computerSelection}`);
     }
-
     return winner;
 };
 
 const game = () => {
-    let playerSelection;
-    let computerSelection;
-    let playerPoints = 0;
-    let computerPoints = 0;
     let result;
+    
+    computerSelection = getComputerChoice();
+    let currentRoundWinner = playRound(playerSelection, computerSelection);
+    if (currentRoundWinner) {
+        if (currentRoundWinner === 'player') {
+            playerScore++;
+            $('.player-score').text(`You: ${playerScore}`);
+        }
+        else if (currentRoundWinner === 'computer') {
+            computerScore++;
+            $('.computer-score').text(`Computer: ${computerScore}`);
 
-    for (let i=0; i<5; i++) {
-        playerSelection = prompt('rock, paper, scissors?');
-        computerSelection = getComputerChoice();
-        let currentRoundWinner = playRound(playerSelection, computerSelection);
-        if (currentRoundWinner) {
-            if (currentRoundWinner === 'player') playerPoints++;
-            else if (currentRoundWinner === 'computer') computerPoints++
         }
     }
 
-    if (playerPoints > computerPoints) result = 'player wins the game!'
-    else if (playerPoints < computerPoints) result = 'computer wins the game!'
+    if (playerScore > computerScore) result = 'player wins the game!'
+    else if (playerScore < computerScore) result = 'computer wins the game!'
     else result = 'it\'s a draw!'
 
     return result;
 }
 
-console.log(game());
+let playerSelection;
+let computerSelection;
+
+let playerScore = 0;
+let computerScore = 0;
+
+// add click handler
+$("button").click(function() {
+    playerSelection = this.id;
+    game();
+});
+
+

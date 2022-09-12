@@ -5,9 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Combo&display=swap" rel="stylesheet">
     <title>Rock Paper Scissors</title>
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
+    <header>
+        <img class="logo" src="images/logo.png">
+        <h1 class="title">
+            Rock Paper Scissors
+        </h1>
+    </header>
+    <div class="scores"> 
+        <div class="player-score"> You: 0 </div>
+        <div class="computer-score"> Computer: 0 </div>
+    </div> 
+    <div class="game">
+        <div class="button-container">
+            <button id="rock">
+                <img class="btn-img" src="images/rock.png">
+            </button>
+            <button class="btn-img" id="paper">
+                <img src="images/paper.png">
+            </button>
+            <button class="btn-img" id="scissors">
+                <img src="images/scissors.png">
+            </button>
+        </div>
+        <div class="round-result"> </div>
+        <div class="winner-declaration"> </div>
+    </div>
     <script src="app.js"> </script>
+    
 </body>
 </html>
